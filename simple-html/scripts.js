@@ -1,5 +1,11 @@
 // Run when the document is loaded and ready
 $(document).ready(() => {
+  // Initialize Bootstrap tooltips
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+
   $('#button-create').click(newItemModal);
   $('#button-upload').click(showUploadModal);
   $('#button-download').click(downloadList);
@@ -54,8 +60,8 @@ function newItemModal() {
           <div class="todo-header">
             <h3>${taskTitle}</h3>
             <div class="todo-buttons">
-              <button class="complete-button"><img class='svg' src="/simple-html/img/complete.svg" alt="Complete"></button>
-              <button class="remove-button"><img class='svg' src="/simple-html/img/remove.svg" alt="Delete"></button>
+              <button class="complete-button" title="Toggle task's completion state" data-bs-toggle="tooltip"><img class='svg' src="/simple-html/img/complete.svg" alt="Complete"></button>
+              <button class="remove-button" title="Delete task" data-bs-toggle="tooltip"><img class='svg' src="/simple-html/img/remove.svg" alt="Delete"></button>
             </div>
           </div>
           <hr>
@@ -98,8 +104,8 @@ function uploadList() {
           <div class="todo-header">
             <h3>${task.title}</h3>
             <div class="todo-buttons">
-              <button class="complete-button"><img class='svg' src="/simple-html/img/complete.svg" alt="Complete"></button>
-              <button class="remove-button"><img class='svg' src="/simple-html/img/remove.svg" alt="Delete"></button>
+              <button class="complete-button" title="Toggle task's completion state" data-bs-toggle="tooltip"><img class='svg' src="/simple-html/img/complete.svg" alt="Complete"></button>
+              <button class="remove-button" title="Delete task" data-bs-toggle="tooltip"><img class='svg' src="/simple-html/img/remove.svg" alt="Delete"></button>
             </div>
           </div>
           <hr>
