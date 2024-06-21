@@ -1,16 +1,17 @@
 // Run when the document is loaded and ready
 $(document).ready(() => {
   $('#button-create').click(newItemModal);
-  $('#button-upload').click(uploadList);
+  $('#button-upload').click(showUploadModal);
   $('#button-download').click(downloadList);
   $('#button-delete').click(deleteList);
+  $('#uploadJsonButton').click(uploadList);
 
   // Initial progress update
   updateProgression();
 
   // Attach event handlers to existing buttons
   $('.complete-button').click(function() {
-    markTaskComplete($(this).closest('.todo'));
+    toggleTaskStatus($(this).closest('.todo'));
   });
 
   $('.remove-button').click(function() {
@@ -18,8 +19,16 @@ $(document).ready(() => {
   });
 });
 
-function markTaskComplete($taskElement) {
-  $taskElement.removeClass('incomplete').addClass('complete');
+function showUploadModal() {
+  $("#uploadModal").modal("show");
+}
+
+function toggleTaskStatus($taskElement) {
+  if ($taskElement.hasClass('incomplete')) {
+    $taskElement.removeClass('incomplete').addClass('complete');
+  } else {
+    $taskElement.removeClass('complete').addClass('incomplete');
+  }
   updateProgression();
 }
 
@@ -58,7 +67,7 @@ function newItemModal() {
 
       // Attach event handlers to new buttons
       $('.complete-button').last().click(function() {
-        markTaskComplete($(this).closest('.todo'));
+        toggleTaskStatus($(this).closest('.todo'));
       });
 
       $('.remove-button').last().click(function() {
@@ -102,7 +111,7 @@ function uploadList() {
 
     // Attach event handlers to new buttons
     $('.complete-button').click(function() {
-      markTaskComplete($(this).closest('.todo'));
+      toggleTaskStatus($(this).closest('.todo'));
     });
 
     $('.remove-button').click(function() {
